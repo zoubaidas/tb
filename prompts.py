@@ -62,10 +62,10 @@ Context:
 {context}
 
 Remember:
+- Update the commands in the task tree with the command outputs. 
+- Update the step status to "done" only when the command output is available or "failed" if the command fails.
+- Update the Result section with the findings from the command output.
 - Print the complete and updated task tree.
-- Update the step status to "done" only when the command output is available.
-- Update the result section with the findings from the command output.
-- If new findings appear, add or modify subsequent steps.
 - End with "Run command: <Tool Command>" if there is a next step.
 
 """

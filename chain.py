@@ -1,7 +1,6 @@
-# chain.py
 import os
 
-from langchain_core.messages import AIMessage
+from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from langchain_openai import ChatOpenAI  # Corrected import
 from langchain.schema.runnable import RunnableSequence
 from langchain.prompts import PromptTemplate
@@ -25,14 +24,13 @@ class TaskTreeChain:
         self.current_task_tree = ""
 
         # Initialize the conversation
-        self._initialize_chain(target)
+        self.system_message = SystemMessage(content=BASE_SYSTEM_PROMPT.format(target=target))
 
-    def _initialize_chain(self, target: str):
-        # Create an executable sequence
-        chain = PromptTemplate(template=BASE_SYSTEM_PROMPT, input_variables=["target"]) | self.llm
 
-        # Generate the initial tree
-        self.current_task_tree = chain.invoke({"target": target}).content
+        response = self.llm.invoke([self.system_message])
+        # Store the result
+        self.current_task_tree = response.content
+
 
     def update_task_tree_with_output(self, output_text: str):
         """
@@ -44,24 +42,26 @@ class TaskTreeChain:
                    f"Tool Output:\n"
                    f"{output_text}")
 
-        # Create an executable sequence for update
-        chain = PromptTemplate(template=CONTEXT_PROMPT, input_variables=["context"]) | self.llm
 
-        # Generate the updated tree
-        updated_tree = chain.invoke({"context": context})
+        # Format context prompt
+        context_prompt = HumanMessage(content=CONTEXT_PROMPT.format(context=context))
+        # Invoke the LLM with the combined context and system message
+        response = self.llm.invoke([self.system_message, context_prompt])
 
-        # Update the tree locally
-        self.current_task_tree = updated_tree.content
+        # Update the local tree
+        self.current_task_tree = response.content
         return self.current_task_tree
 
     def get_current_task_tree(self):
+        """
+        Returns the current task tree.
+        """
         return self.current_task_tree
 
     def get_next_command(self):
         """
         Extracts the "Run command: ..." line from the end of the task tree.
         """
-
         lines = self.current_task_tree.strip().splitlines()
         command = None
         for line in reversed(lines):
@@ -75,4 +75,3 @@ class TaskTreeChain:
             if command.endswith("`"):
                 command = command[:-1]
             return command
-

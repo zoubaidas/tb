@@ -1,24 +1,39 @@
+import os
 import subprocess
 
 
-def execute_command(command: str) -> str:
+def execute_command(command):
     """
-    Exécute une commande Bash sur la machine et retourne la sortie.
-    :param command: Commande Bash à exécuter.
-    :return: Sortie de la commande (stdout).
+    Exécute une commande système.
+    Si la commande est interactive, elle est exécutée directement dans le terminal.
+
+    Args:
+        command (str): La commande à exécuter.
+
+    Returns:
+        str: La sortie standard ou d'erreur si la commande n'est pas interactive.
     """
-    try:
-        result = subprocess.run(
-            command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            cwd="/home/kali"  # Répertoire de travail par défaut
-        )
-        if result.returncode != 0:
-            print(f"Erreur lors de l'exécution de la commande: {result.stderr}")
-        return result.stdout.strip()
-    except Exception as e:
-        print(f"Exception lors de l'exécution de la commande: {e}")
-        return f"Erreur: {e}"
+
+    # Essaye d'exécuter la commande de manière non interactive
+    process = subprocess.Popen(
+        command,
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+
+
+    stdout, stderr = process.communicate()
+    if process.returncode == 0:
+        return stdout.strip()
+    else:
+        return stderr.strip()
+
+
+
+# Exemple d'utilisation
+if __name__ == "__main__":
+    cmd = input("Entrez une commande : ")
+    result = execute_command(cmd)
+    print(result)
