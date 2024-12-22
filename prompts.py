@@ -14,20 +14,11 @@ General Specifications:
 4. Use /home/kali/ as the working directory, and ensure all file paths are explicitly defined and correct.
 5. For attacks requiring a wordlist, use /usr/share/wordlists/rockyou.txt, but note that this file is very large.
 6. If a command outputs results to a file instead of the console, add to the command 'cat' to display the file contents.
-
-Task Tree Guidelines:
-1. Start with the following stages:
-   - 1. Information Gathering
-   - 2. Vulnerability Analysis
-   - 3. Exploitation
-   - 4. Privilege Escalation
-   - 5. Post-Exploitation
-2. Maintain a logical sequence where steps clearly depend on prior outputs.
-3. Focus on automation, minimizing manual intervention wherever possible.
-4. All commands must be compatible with the Bash shell and the /home/kali/ working directory.
+7. All commands must be compatible with the Bash shell and the /home/kali/ working directory.
 
 Step Specifications:
-Each step must be numbered. For example, '1.', '1.1.', '1.1.1.', etc.
+
+Each step must be numbered. For example '1.1.', '1.1.1.', etc.
 Each step must include the following components:
 1. Status: Pending
 1. Objective: Clearly state the purpose and relevance of the step within the penetration test.
@@ -44,13 +35,6 @@ Output Format:
 3. Do not include any additional comments, explanations, or extraneous information.
 4. Use raw text format without any markdown or special characters.
 
-Suggested Tools (Non-Exhaustive):
-- Information Gathering: whois, Sublist3r, Nmap, MassDNS
-- Vulnerability Scanning: Nikto, Nuclei, OpenVAS
-- Exploitation: Metasploit, SearchSploit, Cobalt Strike
-- Password Attacks: Hydra, John the Ripper, Medusa
-- Maintaining Access: Netcat, Pwncat, Weevely
-- Sniffing & Spoofing: Wireshark, Bettercap, Responder
 """
 
 # Prompt utilisé pour redonner le contexte (tâche en cours + sorties précédentes)
@@ -62,7 +46,7 @@ Context:
 {context}
 
 Remember:
-- Update the commands in the task tree with the command outputs. 
+- Update the commands in the task tree with the findings from the command output like services discovered, ports discovered, etc.
 - Update the step status to "done" only when the command output is available or "failed" if the command fails.
 - Update the Result section with the findings from the command output.
 - Print the complete and updated task tree.

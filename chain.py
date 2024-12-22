@@ -18,7 +18,8 @@ class TaskTreeChain:
         # Conversation model
         self.llm = ChatOpenAI(
             base_url="https://openrouter.ai/api/v1",
-            api_key=os.getenv("OPENROUTER_API_KEY")
+            api_key=os.getenv("OPENROUTER_API_KEY"),
+            model="google/gemini-pro-1.5"
         )
 
         self.current_task_tree = ""
