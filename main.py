@@ -1,6 +1,6 @@
 import os
 from chain import TaskTreeChain
-from command_execution import execute_command
+from command_execution import execute_command, format_output
 
 import threading
 import time
@@ -64,7 +64,8 @@ def main():
             stop_loading = True
             #loading_thread.join()  # Attendre que le thread se termine proprement
 
-        print(f"Command output:  {output}\n")
+        print(f"Command output:\n")
+        format_output(output)
 
         # Mise à jour de l'arbre de tâches avec la sortie
         updated_tree = task_tree_chain.update_task_tree_with_output(output)
