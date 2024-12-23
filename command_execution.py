@@ -86,7 +86,6 @@ def execute_command(command):
                 "status": "Success"
             }
         except subprocess.CalledProcessError as e:
-            f
             return {
                 "stdout": None,
                 "stderr": e.stderr.strip(),

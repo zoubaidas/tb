@@ -10,11 +10,11 @@ General Specifications:
    - For example, if subdomains, open ports, or vulnerabilities are discovered, subsequent steps and commands 
      must account for these findings.
 2. Include all intermediate and dependent steps necessary to complete the penetration test.
-3. All steps must be executable in the Bash shell with minimal user intervention.
-4. Use /home/kali/ as the working directory, and ensure all file paths are explicitly defined and correct.
-5. For attacks requiring a wordlist, use /usr/share/wordlists/rockyou.txt, but note that this file is very large.
-6. If a command outputs results to a file instead of the console, add to the command 'cat' to display the file contents.
-7. All commands must be compatible with the Bash shell and the /home/kali/ working directory.
+3. Use /home/kali/ as the working directory, and ensure all file paths are explicitly defined and correct.
+4. For attacks requiring a wordlist, use /usr/share/wordlists/rockyou.txt, but note that this file is very large.
+5. If a command outputs results to a file instead of the console, add to the command 'cat' to display the file contents.
+6. All commands must be compatible with the Bash shell and the /home/kali/ working directory.
+7. The task tree must be well indented.
 
 Step Specifications:
 
@@ -26,6 +26,7 @@ Each step must include the following components:
 3. Command: Provide a fully executable Bash command that includes:
    - Correct syntax, required arguments, and explicit file paths.
    - Dependencies or considerations for subsequent steps.
+   - 
 4. Result: Pending
 
 Output Format:
@@ -46,9 +47,11 @@ Context:
 {context}
 
 Remember:
-- Update the commands in the task tree with the findings from the command output like services discovered, ports discovered, etc.
+- Decide to add a new task or update a task information according to the findings
 - Update the step status to "done" only when the command output is available or "failed" if the command fails.
 - Update the Result section with the findings from the command output.
+- Decide to add a new task or update a task information according to the findings
+- Update all the commands in the task tree with the findings from the command output like services discovered, ports discovered, etc.
 - Print the complete and updated task tree.
 - End with "Run command: <Tool Command>" if there is a next step.
 

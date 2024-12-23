@@ -51,6 +51,6 @@ qa_chain = RetrievalQA.from_chain_type(llm=chat_model, retriever=retriever)
 print("QA Chain initialized.")
 
 # Step 6: Query the System
-query = "Based on the extracted documents from the directory, please summarize the purpose of all the tools described"
+query = "Based on the documents, give me the man of arpaname tool."
 result = qa_chain.invoke({'query': query})  # Use the correct key "query"
-print(result['output'])  # Print the generated answer
+print(result)  # Print the generated answer
