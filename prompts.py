@@ -26,7 +26,6 @@ Each step must include the following components:
 3. Command: Provide a fully executable Bash command that includes:
    - Correct syntax, required arguments, and explicit file paths.
    - Dependencies or considerations for subsequent steps.
-   - 
 4. Result: Pending
 
 Output Format:
@@ -50,7 +49,6 @@ Remember:
 - Decide to add a new task or update a task information according to the findings
 - Update the step status to "done" only when the command output is available or "failed" if the command fails.
 - Update the Result section with the findings from the command output.
-- Decide to add a new task or update a task information according to the findings
 - Update all the commands in the task tree with the findings from the command output like services discovered, ports discovered, etc.
 - Print the complete and updated task tree.
 - End with "Run command: <Tool Command>" if there is a next step.
