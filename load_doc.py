@@ -21,7 +21,9 @@ print(f"Loaded {len(docs)} documents.")
 # Step 2: Split Text into Chunks for Better Processing
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,  # Size of each chunk
-    chunk_overlap=100  # Overlap between chunks
+    chunk_overlap=500,  # Overlap between chunks
+    length_function=len,  # Function to calculate the length of the text
+    add_start_index=True  # Add the start index of each chunk
 )
 split_docs = text_splitter.split_documents(docs)  # Split the documents into smaller chunks
 
@@ -51,6 +53,6 @@ qa_chain = RetrievalQA.from_chain_type(llm=chat_model, retriever=retriever)
 print("QA Chain initialized.")
 
 # Step 6: Query the System
-query = "Based on the documents, give me the man of arpaname tool."
+query = "Based on the documents, give me the man of airbase-ng tool."
 result = qa_chain.invoke({'query': query})  # Use the correct key "query"
 print(result)  # Print the generated answer
